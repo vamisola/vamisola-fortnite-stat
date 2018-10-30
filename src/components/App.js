@@ -1,30 +1,39 @@
 import React, { Component } from 'react';
+import { handleResponse } from '../helpers';
 import './App.css';
-import Card from './Card';
-import API_KEY from './config/api_key'
+import Loading from '../common/Loading';
+import Card from '../components/Card';
+import API_KEY from '../config/api_key';
+import { API_URL } from '../config/config';
 // import Searchbox from './Searchbox';
 
 const USERNAME = 'vamisola';
 const PLATFORM = 'xb1';
 const FORTNITE_KEY = API_KEY;
-// const API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhbWlzb2xhQGdtYWlsLmNvbSIsInVzZXJJZCI6IjViZDEzMGMyZmYyYWZhMTZlNjgwOTljMiJ9.fHlaEvhpr_wsjMA5lyhPIdbO3_ffYF8er9MVwlGCTPU';
-const FORTNITE_USERNAME = `https://fortnite-api.tresmos.xyz/profile/${PLATFORM}/${USERNAME}`;
+const FORTNITE_USERNAME = `${API_URL}${PLATFORM}/${USERNAME}`;
 const FORTNITE_URL = FORTNITE_USERNAME+`?key=${FORTNITE_KEY}`;
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      gamertag: '',
+      loading: false,
+      player: [],
+      error: null,
       platform: '',
-    }
+    };
   }
 
   componentDidMount() {
     fetch(FORTNITE_URL)
-    .then(response => response.json())
+    .then(handleResponse)
+    // .then(response => response.json())
     .then((data) => {
+      console.log('Success', data);
+      const { player } = data;
       this.setState({
-        gamertag: data.info.username,
+        loading: false,
+        // gamertag: .info.username,
         lifetimeWins: data.lifetimeStats.wins,
         lifetimekd: data.lifetimeStats['k/d'],
         lifetimeKills: data.lifetimeStats.kills,
@@ -37,8 +46,11 @@ class App extends Component {
         squadWins: data.group.squad.wins,
         squadkd: data.group.squad['k/d'],
         squadKills: data.group.squad.kills,  
-      })
+      });
     })
+    .catch((error) => {
+      this.setState({error: error.message, loading: false});
+    });
   }
   
   onSearchChange = (event) => {
@@ -48,10 +60,20 @@ class App extends Component {
   }
 
   render() {
-    const { gamertag, lifetimeWins, lifetimekd, lifetimeKills, soloWins, soloKills, solokd, duoWins, duoKills, duokd, squadWins, squadKills, squadkd} = this.state;
+    const { lifetimeWins, lifetimekd, lifetimeKills, soloWins, soloKills, solokd, duoWins, duoKills, duokd, squadWins, squadKills, squadkd, loading, error} = this.state;
+    // const { gamertag, loading, error } = this.state;
+
+    //render only lading component, if loading state is set to true
+    if(loading){
+        return <div className="loading-container"><Loading /></div>
+    }
+    //render only error message, if error occured white fetching data
+    if(error){
+        return <div className="error">{this.state.error}</div>
+    }
     return (
       <div className='tc'>
-          <h1 className='f1'> {gamertag.toUpperCase()}'s Fornite Stats </h1>
+          <h1 className='f1'> {USERNAME.toUpperCase()} 's Fornite Stats </h1>
           <h3 className='tc'>LIFETIME STATS =====> Wins: {lifetimeWins} Kills: {lifetimeKills} K/D: {lifetimekd}</h3>
           <div className="dt-ns dt--fixed-ns">
             <div className="dtc-ns tc pv4 bg-black-10">
