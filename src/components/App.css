@@ -7,7 +7,13 @@
     src: url('Burbank_Big_Condensed_Black.ttf') format('truetype');
 }
 
-h1 {
+body{
+    font-family: 'BURBANK FONT';
+    font-weight: 200;
+    font-size: 1.3em;
+}
+
+h1{
     font-family: 'BURBANK FONT';
     font-weight: 200;
     color: #0ccac4;

@@ -79,7 +79,7 @@ class App extends Component {
       <div className='tc'>
           <h1 className='f1'> {USERNAME.toUpperCase()} 's Fornite Stats </h1>
           <div className='gamertag-header'>
-            <h3 className='tc'>LIFETIME STAT</h3>
+            <h2 className='tc'>LIFETIME STATS</h2>
             <h3><span className="label">Wins: {lifetimeWins} </span><span className="label">Kills: {lifetimeKills} </span><span className="label">K/D: {lifetimekd}</span></h3>
           </div>
           <div className="dt-ns dt--fixed-ns">
