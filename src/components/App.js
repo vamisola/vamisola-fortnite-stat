@@ -18,19 +18,23 @@ class App extends Component {
     super();
     this.state = {
       loading: false,
-      player: [],
+      player: '',
       error: null,
       platform: '',
     };
   }
 
   componentDidMount() {
+    this.setState({
+      loading: true
+    });
+    
     fetch(FORTNITE_URL)
     .then(handleResponse)
-    // .then(response => response.json())
     .then((data) => {
       console.log('Success', data);
-      const { player } = data;
+      const player  = data;
+      console.log('Player', player);
       this.setState({
         loading: false,
         // gamertag: .info.username,
