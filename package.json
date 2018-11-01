@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cors": "^2.8.4",
     "npm": "^6.4.1",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
@@ -13,7 +14,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
+   },
+  "proxy":{
+    "target": "https://fortnite-api.tresmos.xyz/profile/",
+    "changeOrigin": true
+  }, 
   "eslintConfig": {
     "extends": "react-app"
   },
