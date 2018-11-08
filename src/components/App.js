@@ -18,9 +18,9 @@ class App extends Component {
     super();
     this.state = {
       loading: false,
-      player: '',
+      player: 'vamisola',
+      platform: 'xb1',
       error: null,
-      platform: '',
     };
   }
 
@@ -28,7 +28,7 @@ class App extends Component {
     this.setState({
       loading: true
     });
-    
+
     fetch(FORTNITE_URL,{headers: {'Access-Control-Allow-Origin': '*'}})
     .then(handleResponse)
     .then((data) => {
@@ -49,14 +49,14 @@ class App extends Component {
         duoKills: data.group.duo.kills,
         squadWins: data.group.squad.wins,
         squadkd: data.group.squad['k/d'],
-        squadKills: data.group.squad.kills,  
+        squadKills: data.group.squad.kills,
       });
     })
     .catch((error) => {
       this.setState({error: error.message, loading: false});
     });
   }
-  
+
   onSearchChange = (event) => {
     this.setState({
       searchfield: event.target.value
@@ -64,7 +64,7 @@ class App extends Component {
   }
 
   render() {
-    const { lifetimeWins, lifetimekd, lifetimeKills, soloWins, soloKills, solokd, duoWins, duoKills, duokd, squadWins, squadKills, squadkd, loading, error} = this.state;
+    const { player, lifetimeWins, lifetimekd, lifetimeKills, soloWins, soloKills, solokd, duoWins, duoKills, duokd, squadWins, squadKills, squadkd, loading, error} = this.state;
     // const { gamertag, loading, error } = this.state;
 
     //render only lading component, if loading state is set to true
@@ -77,7 +77,7 @@ class App extends Component {
     }
     return (
       <div className='tc'>
-          <h1 className='f1'> {USERNAME.toUpperCase()} 's Fortnite Stats </h1>
+          <h1 className='f1'> {player.toUpperCase()} 's Fortnite Stats </h1>
           <div className='gamertag-header'>
             <h2 className='tc'>LIFETIME STATS</h2>
             <h3><span className="label">Wins: {lifetimeWins} </span><span className="label">Kills: {lifetimeKills} </span><span className="label">K/D: {lifetimekd}</span></h3>
@@ -85,7 +85,7 @@ class App extends Component {
           <div className="dt-ns dt--fixed-ns">
             <div className="dtc-ns tc pv4 bg-black-10">
               <h3 className="bg-light-purple light-blue pa3 ma3" >SOLOS</h3>
-              <Card 
+              <Card
                 wins={soloWins}
                 kills={soloKills}
                 kd={solokd}
@@ -93,7 +93,7 @@ class App extends Component {
             </div>
             <div className="dtc-ns tc pv4 bg-black-05">
               <h3 className="bg-dark-pink light-blue pa3 ma3">DUOS</h3>
-              <Card 
+              <Card
                 wins={duoWins}
                 kills={duoKills}
                 kd={duokd}
@@ -101,7 +101,7 @@ class App extends Component {
             </div>
             <div className="dtc-ns tc pv4 bg-black-10">
               <h3 className="bg-dark-blue light-blue pa3 ma3">SQUADS</h3>
-              <Card 
+              <Card
                 wins={squadWins}
                 kills={squadKills}
                 kd={squadkd}
