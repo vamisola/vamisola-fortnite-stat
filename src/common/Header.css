@@ -21,8 +21,16 @@
     .Header-logo {
         display: none;
     }
+    .Header{
+      margin: 10px;
+    }
+
 }
 
 .fs{
   color: white;
+}
+
+.Header{
+  padding: 20px;
 }

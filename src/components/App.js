@@ -7,6 +7,7 @@ import Header from '../common/Header';
 import API_KEY from '../config/api_key';
 import { API_URL } from '../config/config';
 import GamerStats from '../components/GamerStats';
+import Footer from '../components/Footer';
 // import Searchbox from './Searchbox';
 
 const USERNAME = 'vamisola';
@@ -76,9 +77,8 @@ class App extends Component {
     }
     return (
       <div className='tc'>
-        <Header/>
+        <Header player={player}/>
         <GamerStats
-          player = {player}
           lifetimeWins = {lifetimeWins}
           lifetimeKills = {lifetimeKills}
           lifetimekd = {lifetimekd}
@@ -92,7 +92,7 @@ class App extends Component {
           squadKills = {squadKills}
           squadkd = {squadkd}
           />
-          
+          <Footer />
       </div>
     );
   }

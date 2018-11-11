@@ -1,9 +1,12 @@
 import React from 'react';
 import Card from '../components/Card';
-const gamerstats = ({player, lifetimeWins, lifetimeKills, lifetimekd, soloWins, soloKills, solokd, duoWins, duoKills, duokd, squadWins, squadKills, squadkd}) => {
+import './GamerStats.css'
+
+const gamerstats = ({lifetimeWins, lifetimeKills, lifetimekd, soloWins, soloKills, solokd, duoWins, duoKills, duokd, squadWins, squadKills, squadkd}) => {
+
   return(
+
     <div>
-      <h1 className='f1'> {player} 's Fortnite Stats </h1>
       <div className='gamertag-header'>
         <h2 className='tc'>LIFETIME STATS</h2>
         <h3><span className="label">Wins: {lifetimeWins} </span><span className="label">Kills: {lifetimeKills} </span><span className="label">K/D: {lifetimekd}</span></h3>
