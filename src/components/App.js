@@ -3,8 +3,10 @@ import { handleResponse } from '../helpers';
 import './App.css';
 import Loading from '../common/Loading';
 import Card from '../components/Card';
+import Header from '../common/Header';
 import API_KEY from '../config/api_key';
 import { API_URL } from '../config/config';
+import GamerStats from '../components/GamerStats';
 // import Searchbox from './Searchbox';
 
 const USERNAME = 'vamisola';
@@ -33,11 +35,8 @@ class App extends Component {
     .then(handleResponse)
     .then((data) => {
       console.log('Success', data);
-      const player  = data;
-      console.log('Player', player);
       this.setState({
         loading: false,
-        // gamertag: .info.username,
         lifetimeWins: data.lifetimeStats.wins,
         lifetimekd: data.lifetimeStats['k/d'],
         lifetimeKills: data.lifetimeStats.kills,
@@ -73,45 +72,27 @@ class App extends Component {
     }
     //render only error message, if error occured white fetching data
     if(error){
-        return <div className="error">{this.state.error}</div>
+        return <div className="error">{error}</div>
     }
     return (
       <div className='tc'>
-          <h1 className='f1'> {player.toUpperCase()} 's Fortnite Stats </h1>
-          <div className='gamertag-header'>
-            <h2 className='tc'>LIFETIME STATS</h2>
-            <h3><span className="label">Wins: {lifetimeWins} </span><span className="label">Kills: {lifetimeKills} </span><span className="label">K/D: {lifetimekd}</span></h3>
-          </div>
-          <div className="dt-ns dt--fixed-ns">
-            <div className="dtc-ns tc pv4 bg-black-10">
-              <h3 className="bg-light-purple light-blue pa3 ma3" >SOLOS</h3>
-              <Card
-                wins={soloWins}
-                kills={soloKills}
-                kd={solokd}
-              />
-            </div>
-            <div className="dtc-ns tc pv4 bg-black-05">
-              <h3 className="bg-dark-pink light-blue pa3 ma3">DUOS</h3>
-              <Card
-                wins={duoWins}
-                kills={duoKills}
-                kd={duokd}
-              />
-            </div>
-            <div className="dtc-ns tc pv4 bg-black-10">
-              <h3 className="bg-dark-blue light-blue pa3 ma3">SQUADS</h3>
-              <Card
-                wins={squadWins}
-                kills={squadKills}
-                kd={squadkd}
-              />
-            </div>
-          </div>
-        {/* <Searchbox searchChange={this.onSearchChange}/> */}
-        {/* <p>gamertag: {username}</p>
-        <p>Solo Wins: {usernameSoloWins}</p>
-        <p>k/d: {usernamekd}</p> */}
+        <Header/>
+        <GamerStats
+          player = {player}
+          lifetimeWins = {lifetimeWins}
+          lifetimeKills = {lifetimeKills}
+          lifetimekd = {lifetimekd}
+          soloWins = {soloWins}
+          soloKills = {soloKills}
+          solokd ={solokd}
+          duoWins = {duoWins}
+          duoKills = {duoKills}
+          duokd = {duokd}
+          squadWins = {squadWins}
+          squadKills = {squadKills}
+          squadkd = {squadkd}
+          />
+          
       </div>
     );
   }

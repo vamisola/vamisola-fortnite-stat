@@ -7,6 +7,7 @@ const Header = () => {
     return (
         <div className="Header">
             <img src={logo} alt="logo" className="Header-logo" />
+            <h1 className="fs"> Fortnite Stats </h1>
             {/* <Search /> */}
         </div>
     )

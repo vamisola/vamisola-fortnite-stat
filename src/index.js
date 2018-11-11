@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
-import Header from './common/Header';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
 
 const Fortnite = () => {
     return(
         <div>
-            <Header />
             <App />
         </div>
     )
