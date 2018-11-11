@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { handleResponse } from '../helpers';
 import './App.css';
 import Loading from '../common/Loading';
-import Card from '../components/Card';
 import Header from '../common/Header';
 import API_KEY from '../config/api_key';
 import { API_URL } from '../config/config';
